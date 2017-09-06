@@ -1,16 +1,16 @@
 'use strict';
 
-const AuthModel = require('../models/auth-model'),
+const UserModel = require('../models/user-model'),
 	errors = require('../middlewares/errors'),
-	am = new AuthModel();
+	um = new UserModel();
 
-class AuthController {
+class UserController {
 	index(req, res, next) {
-		if ( req.session.username ) {
-			res.redirect('/teams');
+		if ( req.session.email ) {
+			res.redirect('/communities');
 		} else {
 			res.render('login-form', {
-				title: 'Autenticación de Usuarios',
+				title: 'Valoop',
 				message: req.query.message
 			});
 		}
@@ -22,38 +22,41 @@ class AuthController {
 
 	logInPost(req, res, next) {
 		let user = {
-			username: req.body.username,
+			email: req.body.email,
 			password: req.body.password
 		};
 
 		console.log(user);
 
-		am.getUser(user, (docs) => {
-			req.session.username = ( docs != null ) ? user.username : null;
+		um.getUser(user, (docs) => {
+			req.session.email = ( docs != null ) ? user.email : null;
 
 			console.log(req.session, '---', docs);
 
-			return (req.session.username)
-				? res.redirect('/teams')
+			return (req.session.email)
+				? res.redirect('/communities')
 				: errors.http401(req, res, next);
 		});
 	}
 
 	signInGet(req, res, next) {
-		res.render('signin-form', { title: 'Registro de Usuarios' });
+		res.redirect('/');
 	}
 
 	signInPost(req, res, next) {
 		let user = {
 			user_id: 0,
-			username: req.body.username,
+			email: req.body.email,
+			nick: req.body.nick,
+			name: req.body.name,
+			last_name: req.body.last_name,
 			password: req.body.password
 		};
 
 		console.log(user);
 
-		am.setUser(user, (docs) => {
-			res.redirect(`/?message=El usuario ${user.username} ha sido creado`);
+		um.setUser(user, (docs) => {
+			res.redirect(`/?message=El usuario ${user.email} ha sido creado`);
 		});
 	}
 	
@@ -66,4 +69,4 @@ class AuthController {
 	}
 }
 
-module.exports = AuthController;
+module.exports = UserController;

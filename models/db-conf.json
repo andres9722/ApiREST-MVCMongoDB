@@ -1,6 +1,6 @@
 {
 	"mongo" : {
 		"host" : "localhost",
-		"db" : "indentation_war"
+		"db" : "valoop"
 	}
 }

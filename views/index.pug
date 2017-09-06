@@ -1,37 +1,31 @@
 extends layout.pug
 
 block content
-	section.container
-		h1.header= title
-		img(src="indentation-war.png")
-		article.item
-			h2 Bienvenido #{user}
-			br
-			a.button.show(href="/logout") Cerrar sesión
-		article.item
-			div
-				a.button.add(href="/agregar") Agregar
-				
+	section.contenedor
+		section.container
+			h1.header Communities
+			img.img-index(src="https://www.spectrumhealth.org/-/media/spectrumhealth/documents/healthiercomm/172516k%20healthier%20communities%20anniversary%20event%20graphic%20for%20web.jpg?la=en&hash=3CBC2FFCA4A3AF529E31343A4A31FC1FA18BD774")
+			article.item
+				div
+					a.button.add(href="/add") Agregar
 			if(data.length)
 				table.table
 					tr
-						th Nombre
-						th Twitter
-						th País
-						th Equipo
-						th
-						th
-					each contacto in data
+					th Name
+					th Description
+					th Logo
+					th
+					th
+					each community in data
 						tr
-							td #{contacto.name}
-							td #{contacto.twitter}
-							td #{contacto.country}
-							td #{contacto.side}
+							td #{community.name}
+							td #{community.description}
+							td #{community.logo}
 							td 
-								a.button.edit(href="/editar/" + contacto._id) Editar
+								a.button.edit(href="/edit/" + community._id) Edit
 							td
-								form(method="post", action="/eliminar/" + contacto._id)
-									input.button.delete(type="button", value="Eliminar", onclick="eliminar(this)")
+								form(method="post", action="/remove/" + community._id)
+									input.button.delete(type="button", value="Remove", onclick="eliminar(this)")
 									input(type="hidden", name="_method", value="DELETE")
 				script.
 					function eliminar(input) {
@@ -39,4 +33,10 @@ block content
 						return (deleteOk) ? input.parentNode.submit() : false;
 					}
 			else
-				div.error No tienes contactos que mostrar
+				div.error You do not have communities to show
+		section.container.num2
+			h1.header Your profile
+			article.item
+				h2.welcome WELCOME #{user}
+				br
+				a.button.show.add(href="/logout") LOG OUT

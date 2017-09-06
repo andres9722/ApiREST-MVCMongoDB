@@ -1,7 +1,7 @@
 'use strict';
-const conn = require('./team-schema');
+const conn = require('./community-schema');
 
-class TeamModel {
+class CommunityModel {
 	getAll(cb) {
 		conn.find({}, (err, docs) => {
 			if(err) throw err;
@@ -31,9 +31,9 @@ class TeamModel {
 					{_id : data._id},
 					{
 						name : data.name,
-						twitter : data.twitter,
-						country : data.country,
-						side : data.side
+						description : data.description,
+						logo : data.logo,
+						inv_token : data.inv_token
 					},
 					(err) => {
 						if(err) throw(err);
@@ -52,4 +52,4 @@ class TeamModel {
 	}
 }
 
-module.exports = TeamModel;
+module.exports = CommunityModel;

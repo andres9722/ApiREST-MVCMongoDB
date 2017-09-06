@@ -8,18 +8,16 @@ block content
 			br
 			a.button.show(href="/logout") Cerrar sesión
 		article.item
-			form.form(method="post", action="/actualizar/" + data._id)
+			form.form(method="post", action="/update/" + data._id)
 				input(type="hidden", name="_method", value="PUT")
 				input(type="hidden", name="_id", value=data._id.toString())
 				fieldset
 					div
-						input(type="text", name="name", placeholder="nombre", value=data.name, required)
+						input(type="text", name="name", placeholder="Name", value=data.name, required)
 					div
-						input(type="text", name="twitter", placeholder="twitter", value=data.twitter, required)
+						input(type="text", name="description", placeholder="Description", value=data.description, required)
 					div
-						input(type="text", name="country", placeholder="pais", value=data.country, required)
-					div
-						input(type="text", name="side", placeholder="equipo", value=data.side, required)
+						input(type="text", name="logo", placeholder="Logo", value=data.logo, required)
 					div
 						input.button.edit(type="submit", value="Editar")
 		a.button.show(href="/") Inicio

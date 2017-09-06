@@ -1,11 +1,11 @@
 'use strict';
-const conn = require('./auth-schema');
+const conn = require('./user-schema');
 
-class AuthModel {
+class UserModel {
 	getUser(user, cb) {
 		conn
 			.findOne({
-				username : user.username,
+				email : user.email,
 				password : user.password
 			})
 			.exec((err, docs) => {
@@ -22,4 +22,4 @@ class AuthModel {
 	}
 }
 
-module.exports = AuthModel;
+module.exports = UserModel;

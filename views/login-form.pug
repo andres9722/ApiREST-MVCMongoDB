@@ -1,18 +1,33 @@
 extends layout.pug
 
 block content
-	section.container
-		h1.header= title
-		if (message)
-			div.error= message
-		article.item
-			form.form(method="post", action="/login")
-				fieldset
-					div
-						input#username(type="text", name="username" placeholder="usuario", required)
-					div
-						input#password(type="password", name="password", placeholder="password" required)
-					div
-						input.button.show(type="submit", value="Loguearse")
-					div
-						a.button.show(href="/signin") Registrarse
+    section.contenedor
+        section.container
+            h1.header register to valoop
+            if (message)
+                div.error= message
+            article.item
+                form.form(method="post", action="/signin")       
+                    div
+                        input(type="text", name="email", placeholder="Email", required)
+                    div
+                        input(type="text", name="nick", placeholder="Nick", required)
+                    div
+                        input(type="text", name="name", placeholder="Name", required)
+                    div
+                        input(type="text", name="last_name", placeholder="Last name", required)
+                    div
+                        input(type="password", name="password", placeholder="Password", required)
+                    div
+                        input.button.add(type="submit", value="Register")
+
+        section.container.num2
+            h1.header LOGIN TO VALOOP
+            article.item
+                form.form(method="post", action="/login")       
+                    div
+                        input(type="text", name="email", placeholder="Email", required)
+                    div
+                        input(type="password", name="password", placeholder="Password", required)
+                    div
+                        input.button.add(type="submit", value="LOGIN")
